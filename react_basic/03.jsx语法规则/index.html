@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>jsx语法规则</title>
+		<style>
+			.title {
+				width: 200px;
+				background-color: orange;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 容器 -->
+		<div id="app"></div>
+
+		<!-- react核心库 -->
+		<script src="../js/react.development.js"></script>
+		<!-- react 操作DOM -->
+		<script src="../js/react-dom.development.js"></script>
+		<!-- 将jsx语法转成js语法 -->
+		<script src="../js/babel.min.js"></script>
+
+		<script type="text/babel">
+			const title = "hello react";
+			const styleName = "title";
+
+			// 创建虚拟DOM
+			const VDOM = (
+				<div>
+					<h1 className={styleName}>
+						<span>{title}</span>
+					</h1>
+					<input type="text" />
+				</div>
+			);
+
+			ReactDOM.render(VDOM, document.getElementById("app"));
+
+			/**
+			 * jsx语法规则
+			 * 1.定义虚拟DOM时，不需要写引号；
+			 * 2.标签中混用js表达式时要使用{}；
+			 * 3.样式的类名要用className，不能用class；
+			 * 4.内联样式要使用style={{key:value}}的形式;
+			 * 5.只有一个根标签；
+			 * 6.标签必须闭合；
+			 * 7.标签首字母：
+			 *    (1).若小写字母开头，则将该标签转成HTML中同名元素，若HTML中无同名元素，则报错；
+			 *    (2).若大写字母开头，则渲染对应组件。若组件未定义则报错。
+			 *
+			 */
+		</script>
+	</body>
+</html>

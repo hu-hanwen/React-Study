@@ -28,7 +28,13 @@
 				}
 			}
 
-			ReactDOM.render(<Person name="胡八一" gender="男" age={28}></Person>, document.getElementById("app"));
+			const personObj = {
+				name: "张三",
+				gender: "未知",
+				age: 999,
+			};
+			// 批量传递props
+			ReactDOM.render(<Person {...personObj}></Person>, document.getElementById("app"));
 		</script>
 	</body>
 </html>

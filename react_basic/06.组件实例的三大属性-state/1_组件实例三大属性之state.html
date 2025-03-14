@@ -28,15 +28,25 @@
 				render() {
 					// 此处的this是组件实例对象/类的实例对
 					// console.log(this);
-					return <h2 onClick={test}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
+					return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
+				}
+
+				// 类中的方法最终是在类的原型对象(类.property)中
+				changeWeather() {
+					// 此处的this是undefined？为什么是undefined呢？
+					// 因为该函数的调用方式是onClick，并不是该类的实例对象。
+					// 如果是该类的实例对象调用，则this就是该类的实例对象
+					// 因为是onClick方式调用，理论上应该是window，但是类中的方法默认开启了局部的严格模式
+					// 严格模式下，禁止this指向window，故此处的this才是undefined
+					console.log(this);
 				}
 			}
 
 			ReactDOM.render(<Weather />, document.getElementById("app"));
 
-			function test() {
-				console.log("标题被点击了");
-			}
+			// const w = new Weather();
+
+			// w.changeWeather();
 		</script>
 	</body>
 </html>

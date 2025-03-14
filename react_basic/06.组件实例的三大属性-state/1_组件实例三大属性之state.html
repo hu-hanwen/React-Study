@@ -28,11 +28,15 @@
 				render() {
 					// 此处的this是组件实例对象/类的实例对
 					// console.log(this);
-					return <h2>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
+					return <h2 onClick={test}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
 				}
 			}
 
 			ReactDOM.render(<Weather />, document.getElementById("app"));
+
+			function test() {
+				console.log("标题被点击了");
+			}
 		</script>
 	</body>
 </html>

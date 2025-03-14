@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>1_类的基本知识</title>
+	</head>
+	<body>
+		<script>
+			// 定义一个类
+			class Person {
+				// 构造器
+				constructor(name, age) {
+					// 此处的this是实例对象
+					this.name = name;
+					this.age = age;
+				}
+
+				say() {
+					console.log(`${this.name}的年龄是${this.age}`);
+				}
+			}
+
+			class Student extends Person {
+				// 如果想定义独有的可以写构造器
+				constructor(name, age, address) {
+					super(name, age);
+					this.address = address;
+				}
+
+				// 重写父类的方法
+				say() {
+					console.log(`${this.name}的年龄是${this.age}，来自于地球`);
+				}
+			}
+
+			const p1 = new Person("张雪梅", 30);
+			const p2 = new Person("胡瀚文", 28);
+
+			const s1 = new Student("麦当", 999, "地球");
+
+			console.log(s1);
+			s1.say();
+
+			// console.log(p1);
+			// console.log(p2);
+			// p1.say();
+			// p2.say();
+		</script>
+	</body>
+</html>

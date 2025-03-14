@@ -23,6 +23,9 @@
 					this.state = {
 						isHot: true,
 					};
+					// 解决changeWeather函数中的this指向问题
+					// 给实例对象身上添加changeWeather方法，方法的值来自于类的原型对象，再通过bind修改this指向问题
+					this.changeWeather = this.changeWeather.bind(this);
 				}
 
 				render() {

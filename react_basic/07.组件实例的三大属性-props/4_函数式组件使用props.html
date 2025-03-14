@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>4_函数式组件使用props</title>
+	</head>
+	<body>
+		<div id="app1"></div>
+		<div id="app2"></div>
+		<div id="app3"></div>
+
+		<script src="../js/react.development.js"></script>
+		<script src="../js/react-dom.development.js"></script>
+		<script src="../js/babel.min.js"></script>
+		<!-- 对组件props的限制，引入后全局中多了一个PropTypes对象 -->
+		<script src="../js/prop-types.js"></script>
+
+		<script type="text/babel">
+			// 创建组件
+			// class Person extends React.Component {
+			// 	// props的简写方式
+			// 	// 加了static表示该属性是静态属性，即该属性属于类，而不是类的实例对象
+			// 	static propTypes = {
+			// 		// 限制name的属性值必须为string类型，且必传
+			// 		name: PropTypes.string.isRequired,
+			// 		// 限制gender的属性值必须为string类型，可选
+			// 		gender: PropTypes.string,
+			// 		// 限制age的属性值必须为number类型，可选
+			// 		age: PropTypes.number,
+			// 	};
+
+			// 	// 指定默认值
+			// 	static defaultProps = {
+			// 		gender: "未知",
+			// 		age: 99,
+			// 	};
+
+			// 	// react会帮我们调用render方法，所以render方法中的this是类的实例对象
+			// 	render() {
+			// 		// console.log(this);
+			// 		let { name, gender, age } = this.props;
+			// 		return (
+			// 			<ul>
+			// 				<li>姓名：{name}</li>
+			// 				<li>性别：{gender}</li>
+			// 				<li>年龄：{age}</li>
+			// 			</ul>
+			// 		);
+			// 	}
+			// }
+
+			function Person(props) {
+				const { name, age, gender } = props;
+				return (
+					<ul>
+						<li>姓名：{name}</li>
+						<li>性别：{gender}</li>
+						<li>年龄：{age}</li>
+					</ul>
+				);
+			}
+
+			Person.propTypes = {
+				name: PropTypes.string.isRequired,
+				age: PropTypes.number,
+				gender: PropTypes.string,
+			};
+
+			Person.defaultProps = {
+				age: 99,
+				gender: "未知",
+			};
+
+			// 批量传递props
+			ReactDOM.render(<Person name="jerry" age={28}></Person>, document.getElementById("app1"));
+		</script>
+	</body>
+</html>

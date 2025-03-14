@@ -41,7 +41,11 @@
 					// 如果是该类的实例对象调用，则this就是该类的实例对象
 					// 因为是onClick方式调用，理论上应该是window，但是类中的方法默认开启了局部的严格模式
 					// 严格模式下，禁止this指向window，故此处的this才是undefined
-					console.log(this);
+					// console.log(this);
+
+					this.setState({
+						isHot: !this.state.isHot,
+					});
 				}
 			}
 

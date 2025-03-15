@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>3_回调ref中函数调用次数的问题</title>
+	</head>
+	<body>
+		<!-- 容器 -->
+		<div id="app"></div>
+
+		<!-- react核心库 -->
+		<script src="../js/react.development.js"></script>
+		<!-- 支持react操作DOM -->
+		<script src="../js/react-dom.development.js"></script>
+		<!-- 将jsx语法转成js语法 -->
+		<script src="../js/babel.min.js"></script>
+
+		<script type="text/babel">
+			class Demo extends React.Component {
+				state = {
+					isHot: false,
+				};
+
+				changeWeather = () => {
+					this.setState({
+						isHot: !this.state.isHot,
+					});
+				};
+
+				saveInput = currentNode => {
+					this.input1 = currentNode;
+					console.log("@", currentNode);
+				};
+
+				showMessage = () => {
+					const { input1 } = this;
+					if (!input1.value) {
+						alert("请先输入内容！");
+						return;
+					}
+					alert(input1.value);
+				};
+
+				showMessage2 = () => {
+					const { input2 } = this;
+					if (!input2.value) {
+						alert("请先输入内容！");
+						return;
+					}
+					alert(input2.value);
+				};
+
+				render() {
+					return (
+						<div>
+							<h2>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>
+							{
+								/**
+								 * 写成内联函数会有多次调用问题（render函数调用一次，内联函数调用两次）
+								 * 原因：每次渲染是会创建一个新的函数实例，react会清空旧的ref重新设置新的
+								 * 故第一次调用是传入的是null，
+								 * 第二次调用时传入节点
+								 */
+								// <input
+								// 	ref={c => {
+								// 		this.input1 = c;
+								// 		console.log("@", c);
+								// 	}}
+								// 	type="text"
+								// 	placeholder="点击按钮展示输入内容"
+								// />
+							}
+							<input ref={this.saveInput} type="text" placeholder="点击按钮展示输入内容" />
+							<button onClick={this.showMessage} style={{ margin: "10px" }}>
+								点击展示输入内容
+							</button>
+							<br />
+							<button onClick={this.changeWeather}>点击切换天气</button>
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<Demo />, document.getElementById("app"));
+		</script>
+	</body>
+</html>

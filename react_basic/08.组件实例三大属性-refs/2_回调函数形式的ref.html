@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>2_回调函数形式的ref</title>
+	</head>
+	<body>
+		<!-- 容器 -->
+		<div id="app"></div>
+
+		<!-- react核心库 -->
+		<script src="../js/react.development.js"></script>
+		<!-- 支持react操作DOM -->
+		<script src="../js/react-dom.development.js"></script>
+		<!-- 将jsx语法转成js语法 -->
+		<script src="../js/babel.min.js"></script>
+
+		<script type="text/babel">
+			class Demo extends React.Component {
+				showMessage = () => {
+					const { input1 } = this;
+					if (!input1.value) {
+						alert("请先输入内容！");
+						return;
+					}
+					alert(input1.value);
+				};
+
+				showMessage2 = () => {
+					const { input2 } = this;
+					if (!input2.value) {
+						alert("请先输入内容！");
+						return;
+					}
+					alert(input2.value);
+				};
+
+				render() {
+					return (
+						<div>
+							<input ref={c => (this.input1 = c)} type="text" placeholder="点击按钮展示输入内容" />
+							<button onClick={this.showMessage} style={{ margin: "10px" }}>
+								点击展示输入内容
+							</button>
+							<input
+								ref={c => (this.input2 = c)}
+								onBlur={this.showMessage2}
+								type="text"
+								placeholder="失去焦点展示输入内容"
+							/>
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<Demo />, document.getElementById("app"));
+		</script>
+	</body>
+</html>

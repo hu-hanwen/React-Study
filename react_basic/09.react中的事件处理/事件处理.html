@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>事件处理</title>
+		<style>
+			.btn {
+				margin: 0 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 容器 -->
+		<div id="app"></div>
+
+		<!-- react核心库 -->
+		<script src="../js/react.development.js"></script>
+		<!-- 支持react操作DOM -->
+		<script src="../js/react-dom.development.js"></script>
+		<!-- 将jsx语法转成js语法 -->
+		<script src="../js/babel.min.js"></script>
+
+		<script type="text/babel">
+			class Demo extends React.Component {
+				input1 = React.createRef();
+
+				showData = () => {
+					alert(this.input1.current.value);
+				};
+
+				blurShowData = event => {
+					alert(event.target.value);
+				};
+
+				render() {
+					return (
+						<div>
+							<input ref={this.input1} type="text" placeholder="点击按钮展示数据" />
+							<button onClick={this.showData} className="btn">
+								展示数据
+							</button>
+							<input onBlur={this.blurShowData} type="text" placeholder="失去焦点展示数据" />
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<Demo />, document.getElementById("app"));
+		</script>
+	</body>
+</html>

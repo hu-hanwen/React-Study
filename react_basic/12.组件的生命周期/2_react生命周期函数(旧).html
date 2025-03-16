@@ -35,6 +35,16 @@
 					});
 				};
 
+				// 卸载组件
+				death = () => {
+					ReactDOM.unmountComponentAtNode(document.getElementById("app"));
+				};
+
+				// 强制更新组件
+				force = () => {
+					this.forceUpdate();
+				}
+
 				// 组件挂载之前
 				componentWillMount() {
 					console.log("Count --- componentWillMount");
@@ -47,6 +57,8 @@
 						<div>
 							<h2>当前求和为：{this.state.count}</h2>
 							<button onClick={this.add}>count + 1</button>
+							<button onClick={this.death}>卸载组件</button>
+							<button onClick={this.force}>强制更新组件</button>
 						</div>
 					);
 				}
@@ -59,7 +71,7 @@
 				// 控制组件更新的【阀门】
 				shouldComponentUpdate() {
 					console.log("Count --- shouldComponentUpdate");
-					return true;
+					return false;
 				}
 
 				// 组件将要更新的钩子
@@ -70,6 +82,11 @@
 				// 组件更新完毕的钩子
 				componentDidUpdate() {
 					console.log("Count --- componentDidUpdate");
+				}
+
+				// 组件卸载之前调用
+				componentWillUnmount() {
+					console.log("Count --- componentWillUnmount");
 				}
 			}
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>2_不使用柯里化的写法</title>
+	</head>
+	<body>
+		<!-- 容器 -->
+		<div id="app"></div>
+
+		<!-- react核心库 -->
+		<script src="../js/react.development.js"></script>
+		<!-- 支持react操作DOM -->
+		<script src="../js/react-dom.development.js"></script>
+		<!-- 将jsx语法转成js语法 -->
+		<script src="../js/babel.min.js"></script>
+
+		<script type="text/babel">
+			class Login extends React.Component {
+				state = {
+					username: "",
+					password: "",
+				};
+
+				saveFormData = (dataType, event) => {
+					this.setState({
+						[dataType]: event.target.value,
+					});
+				};
+
+				handlerSubmit = event => {
+					// 组件默认行为
+					event.preventDefault();
+					const { username, password } = this.state;
+					alert(`账号：${username}，密码：${password}`);
+				};
+
+				render() {
+					return (
+						<form onSubmit={this.handlerSubmit}>
+							<label>
+								<span>账号：</span>
+								<input
+									type="text"
+									onChange={event => this.saveFormData("username", event)}
+									placeholder="请输入用户名"
+									name="username"
+								/>
+							</label>
+							<br />
+							<label>
+								<span>密码：</span>
+								<input
+									type="password"
+									onChange={event => this.saveFormData("password", event)}
+									placeholder="请输入密码"
+									name="password"
+								/>
+							</label>
+							<br />
+							<button>登录</button>
+						</form>
+					);
+				}
+			}
+
+			ReactDOM.render(<Login />, document.getElementById("app"));
+		</script>
+	</body>
+</html>

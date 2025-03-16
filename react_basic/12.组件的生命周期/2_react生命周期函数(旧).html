@@ -42,7 +42,7 @@
 
 				// 渲染
 				render() {
-					console.log("render");
+					console.log("Count --- render");
 					return (
 						<div>
 							<h2>当前求和为：{this.state.count}</h2>
@@ -54,6 +54,22 @@
 				// 挂载完成
 				componentDidMount() {
 					console.log("Count --- componentDidMount");
+				}
+
+				// 控制组件更新的【阀门】
+				shouldComponentUpdate() {
+					console.log("Count --- shouldComponentUpdate");
+					return true;
+				}
+
+				// 组件将要更新的钩子
+				componentWillUpdate() {
+					console.log("Count --- componentWillUpdate");
+				}
+
+				// 组件更新完毕的钩子
+				componentDidUpdate() {
+					console.log("Count --- componentDidUpdate");
 				}
 			}
 

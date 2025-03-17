@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>1_key的作用</title>
+	</head>
+	<body>
+		<div id="app"></div>
+
+		<script src="../js/react.development.js"></script>
+		<script src="../js/react-dom.development.js"></script>
+		<script src="../js/babel.min.js"></script>
+
+		<script type="text/babel">
+			class List extends React.Component {
+				state = {
+					person: [
+						{ id: "fksf001", name: "张三", age: 20 },
+						{ id: "fksf002", name: "李四", age: 40 },
+					],
+				};
+
+				addPerson = () => {
+					const personObj = {
+						id: "fksf003",
+						name: "王五",
+						age: 50,
+					};
+					this.setState({
+						person: [personObj, ...this.state.person],
+					});
+				};
+
+				render() {
+					return (
+						<div>
+							<button onClick={this.addPerson}>添加新人员</button>
+							<h2>人员列表：</h2>
+							<ul>
+								{this.state.person.map(item => {
+									return (
+										<li key={item.id}>
+											{item.name} --- {item.age}
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<List />, document.getElementById("app"));
+		</script>
+	</body>
+</html>

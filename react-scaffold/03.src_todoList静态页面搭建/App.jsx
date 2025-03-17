@@ -6,24 +6,13 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 export default class App extends Component {
-	// 初始化数据
-	state = {
-		taskList: [
-			{ id: "001", taskName: "学习React", isDone: false },
-			{ id: "002", taskName: "学习微信小程序", isDone: false },
-			{ id: "003", taskName: "学习Vue", isDone: true },
-		],
-	};
-
 	render() {
-		const { taskList } = this.state;
-
 		return (
 			<div className="todo-container">
 				<div className="todo-wrap">
 					<Header></Header>
-					<List taskList={taskList}></List>
-					<Footer taskList={taskList}></Footer>
+					<List></List>
+					<Footer></Footer>
 				</div>
 			</div>
 		);

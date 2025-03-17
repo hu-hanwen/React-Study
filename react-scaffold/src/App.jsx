@@ -15,13 +15,21 @@ export default class App extends Component {
 		],
 	};
 
+	// 添加新任务
+	addTask = newTaskItem => {
+		const { taskList } = this.state;
+		this.setState({
+			taskList: [newTaskItem, ...taskList],
+		});
+	};
+
 	render() {
 		const { taskList } = this.state;
 
 		return (
 			<div className="todo-container">
 				<div className="todo-wrap">
-					<Header></Header>
+					<Header addTask={this.addTask}></Header>
 					<List taskList={taskList}></List>
 					<Footer taskList={taskList}></Footer>
 				</div>

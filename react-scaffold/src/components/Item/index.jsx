@@ -23,7 +23,7 @@ export default class Item extends Component {
 		return (
 			<li>
 				<label>
-					<input type="checkbox" defaultChecked={isDone} onChange={this.handlerCheck(id)} />
+					<input type="checkbox" checked={isDone} onChange={this.handlerCheck(id)} />
 					<span>{taskName}</span>
 				</label>
 				<button className="btn btn-danger" onClick={() => this.handlerDelete(id)} style={{ display: "none" }}>

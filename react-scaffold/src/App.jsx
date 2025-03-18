@@ -47,6 +47,28 @@ export default class App extends Component {
 		});
 	};
 
+	// 全选/全不选
+	handlerIsAllCheck = isChecked => {
+		const { taskList } = this.state;
+		const newTaskList = taskList.map(taskItem => {
+			return { ...taskItem, isDone: isChecked };
+		});
+		this.setState({
+			taskList: newTaskList,
+		});
+	};
+
+	// 清除已完成任务
+	clearDoneTask = () => {
+		const { taskList } = this.state;
+		const newTaskList = taskList.filter(taskItem => {
+			return !taskItem.isDone;
+		});
+		this.setState({
+			taskList: newTaskList,
+		});
+	};
+
 	render() {
 		const { taskList } = this.state;
 
@@ -55,7 +77,11 @@ export default class App extends Component {
 				<div className="todo-wrap">
 					<Header addTask={this.addTask}></Header>
 					<List taskList={taskList} updateTaskItem={this.updateTaskItem} removeTaskItem={this.removeTaskItem}></List>
-					<Footer taskList={taskList}></Footer>
+					<Footer
+						taskList={taskList}
+						handlerIsAllCheck={this.handlerIsAllCheck}
+						clearDoneTask={this.clearDoneTask}
+					></Footer>
 				</div>
 			</div>
 		);

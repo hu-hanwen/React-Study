@@ -36,6 +36,17 @@ export default class App extends Component {
 		});
 	};
 
+	// 删除任务
+	removeTaskItem = currentId => {
+		const { taskList } = this.state;
+		const newTaskList = taskList.filter(taskItem => {
+			return taskItem.id !== currentId;
+		});
+		this.setState({
+			taskList: newTaskList,
+		});
+	};
+
 	render() {
 		const { taskList } = this.state;
 
@@ -43,7 +54,7 @@ export default class App extends Component {
 			<div className="todo-container">
 				<div className="todo-wrap">
 					<Header addTask={this.addTask}></Header>
-					<List taskList={taskList} updateTaskItem={this.updateTaskItem}></List>
+					<List taskList={taskList} updateTaskItem={this.updateTaskItem} removeTaskItem={this.removeTaskItem}></List>
 					<Footer taskList={taskList}></Footer>
 				</div>
 			</div>

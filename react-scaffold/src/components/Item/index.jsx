@@ -10,6 +10,13 @@ export default class Item extends Component {
 		};
 	};
 
+	handlerDelete = currentId => {
+		if (window.confirm("确定删除吗？")) {
+			const { removeTaskItem } = this.props;
+			removeTaskItem(currentId);
+		}
+	};
+
 	render() {
 		const { id, taskName, isDone } = this.props;
 
@@ -19,7 +26,7 @@ export default class Item extends Component {
 					<input type="checkbox" defaultChecked={isDone} onChange={this.handlerCheck(id)} />
 					<span>{taskName}</span>
 				</label>
-				<button className="btn btn-danger" style={{ display: "none" }}>
+				<button className="btn btn-danger" onClick={() => this.handlerDelete(id)} style={{ display: "none" }}>
 					删除
 				</button>
 			</li>

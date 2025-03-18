@@ -23,6 +23,19 @@ export default class App extends Component {
 		});
 	};
 
+	// 更新任务
+	updateTaskItem = (currentId, isChecked) => {
+		const { taskList } = this.state;
+		taskList.forEach(taskItem => {
+			if (taskItem.id === currentId) {
+				taskItem.isDone = isChecked;
+			}
+		});
+		this.setState({
+			taskList,
+		});
+	};
+
 	render() {
 		const { taskList } = this.state;
 
@@ -30,7 +43,7 @@ export default class App extends Component {
 			<div className="todo-container">
 				<div className="todo-wrap">
 					<Header addTask={this.addTask}></Header>
-					<List taskList={taskList}></List>
+					<List taskList={taskList} updateTaskItem={this.updateTaskItem}></List>
 					<Footer taskList={taskList}></Footer>
 				</div>
 			</div>

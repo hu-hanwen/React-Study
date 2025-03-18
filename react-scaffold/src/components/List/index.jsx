@@ -4,7 +4,7 @@ import "./index.css";
 
 export default class List extends Component {
 	render() {
-		const { taskList } = this.props;
+		const { taskList, updateTaskItem } = this.props;
 
 		return (
 			<ul className="todo-main">
@@ -13,7 +13,7 @@ export default class List extends Component {
 					// return <Item taskItem={taskItem} key={taskItem.id}></Item>;
 
 					// React中写法
-					return <Item {...taskItem} key={taskItem.id}></Item>;
+					return <Item {...taskItem} key={taskItem.id} updateTaskItem={updateTaskItem}></Item>;
 				})}
 			</ul>
 		);

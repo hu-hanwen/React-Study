@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import Search from "./components/Search";
+import List from "./components/List";
 export default class App extends Component {
 	render() {
 		return (
-			<div>
-				<h2>我是App组件</h2>
+			<div className="container">
+				<Search></Search>
+				<List></List>
 			</div>
 		);
 	}

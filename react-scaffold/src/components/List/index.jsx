@@ -1,9 +1,33 @@
 import React, { Component } from "react";
+import PubSub from "pubsub-js";
 import "./index.css";
 
 export default class List extends Component {
+	state = {
+		// 标识是否初次展示
+		isFirst: true,
+		// 标识是否加载中
+		isLoading: false,
+		// 搜索回来的用户数据
+		userData: [],
+		// 存储错误信息
+		errorInfo: "",
+	};
+
+	// 组件挂载后订阅消息（接收数据）
+	componentDidMount() {
+		this.token = PubSub.subscribe("updateListState", (_, data) => {
+			this.setState(data);
+		});
+	}
+
+	// 组件卸载之前退订消息（取消订阅）
+	componentWillUnmount() {
+		PubSub.unsubscribe(this.token);
+	}
+
 	render() {
-		const { isFirst, isLoading, userData, errorInfo } = this.props;
+		const { isFirst, isLoading, userData, errorInfo } = this.state;
 
 		return (
 			<div className="row">

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { NavLink, Link, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import MyNavLink from "./components/MyNavLink";
 
 export default class App extends Component {
 	render() {
@@ -24,16 +23,12 @@ export default class App extends Component {
 							</a> */}
 
 							{/* react中实现 */}
-							{/* <NavLink className="list-group-item" activeClassName="active" to="/home">
+							<NavLink className="list-group-item" activeClassName="active" to="/home">
 								Home
 							</NavLink>
 							<NavLink className="list-group-item" activeClassName="active" to="/about">
 								About
-							</NavLink> */}
-
-							{/* 使用二次封装的NavLink */}
-							<MyNavLink to="/home">Home</MyNavLink>
-							<MyNavLink to="/about">About</MyNavLink>
+							</NavLink>
 						</div>
 					</div>
 					<div className="col-xs-6">

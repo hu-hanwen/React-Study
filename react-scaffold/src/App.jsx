@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Route } from "react-router-dom";
+import { NavLink, Link, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -23,12 +23,12 @@ export default class App extends Component {
 							</a> */}
 
 							{/* react中实现 */}
-							<Link className="list-group-item" to="/home">
+							<NavLink className="list-group-item" activeClassName="active" to="/home">
 								Home
-							</Link>
-							<Link className="list-group-item active" to="/about">
+							</NavLink>
+							<NavLink className="list-group-item" activeClassName="active" to="/about">
 								About
-							</Link>
+							</NavLink>
 						</div>
 					</div>
 					<div className="col-xs-6">

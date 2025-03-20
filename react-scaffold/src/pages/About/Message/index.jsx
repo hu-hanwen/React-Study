@@ -42,6 +42,18 @@ export default class Message extends Component {
 		};
 	};
 
+	forWard = () => {
+		this.props.history.goForward();
+	};
+
+	back = () => {
+		this.props.history.goBack();
+	};
+
+	go = () => {
+		this.props.history.go(2);
+	};
+
 	render() {
 		return (
 			<div>
@@ -81,6 +93,16 @@ export default class Message extends Component {
 
 				{/* state参数不用接收 */}
 				<Route path="/about/message/detail" component={Detail}></Route>
+
+				<button onClick={this.forWard} className="box">
+					前进
+				</button>
+				<button onClick={this.back} className="box">
+					后退
+				</button>
+				<button onClick={this.go} className="box">
+					go
+				</button>
 			</div>
 		);
 	}

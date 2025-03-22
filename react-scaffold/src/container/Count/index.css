@@ -1,3 +1,6 @@
-button {
-	margin: 0 6px;
+.count button {
+  margin: 0 6px;
+}
+.count .personSum {
+  color: red;
 }

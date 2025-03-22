@@ -1,64 +1,62 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import "./index.css";
-import { incrementAction, decrementAction, incrementAsync } from "../../redux/count_action";
+import { increment, decrement, incrementAsync } from "../../redux/actions/count";
 
-// UI组件
 class Count extends Component {
 	selectEle = createRef();
 
-	add = () => {
+	// 加
+	increment = () => {
 		const { value } = this.selectEle.current;
-		const { incrementAction } = this.props;
-		incrementAction(Number(value));
+		this.props.increment(Number(value));
 	};
 
-	minus = () => {
+	// 减
+	decrement = () => {
 		const { value } = this.selectEle.current;
-		const { decrementAction } = this.props;
-		decrementAction(Number(value));
+		this.props.decrement(Number(value));
 	};
 
-	addIfOdd = () => {
+	// 奇数再加
+	incrementOdd = () => {
 		const { value } = this.selectEle.current;
-		const { count, incrementAction } = this.props;
+		const { count, increment } = this.props;
 		if (count % 2) {
-			incrementAction(Number(value));
+			increment(Number(value));
 		}
 	};
 
-	asyncAdd = () => {
+	// 等一等再加
+	incrementWait = () => {
 		const { value } = this.selectEle.current;
-		const { incrementAsync } = this.props;
-		incrementAsync(Number(value), 500);
+		this.props.incrementAsync(Number(value), 1000);
 	};
 
 	render() {
-		const { count } = this.props;
+		const { count, personSum } = this.props;
 
 		return (
-			<div>
-				<h2>当前求和为：{count}</h2>
+			<div className="count">
+				<h2>
+					我是Count组件，Person组件总人数为：<span className="personSum">{personSum}</span>
+				</h2>
+				<h3>当前求和为：{count}</h3>
 				<select ref={this.selectEle}>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 				</select>
-				<button onClick={this.add}>+</button>
-				<button onClick={this.minus}>-</button>
-				<button onClick={this.addIfOdd}>奇数再加</button>
-				<button onClick={this.asyncAdd}>等一等再加</button>
+				<button onClick={this.increment}>+</button>
+				<button onClick={this.decrement}>-</button>
+				<button onClick={this.incrementOdd}>奇数再加</button>
+				<button onClick={this.incrementWait}>等一等再加</button>
 			</div>
 		);
 	}
 }
 
-// connect是高阶组件，接受UI组件，返回容器组件
 export default connect(
-	state => ({ count: state }), // 映射state到props
-	{
-		incrementAction,
-		decrementAction,
-		incrementAsync,
-	}, // 映射dispatch到props
+	state => ({ count: state.count, personSum: state.personList.length }), // 映射state到props
+	{ increment, decrement, incrementAsync },
 )(Count);

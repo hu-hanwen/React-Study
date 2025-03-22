@@ -1,5 +1,15 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { thunk } from "redux-thunk";
-import reducer from "./count_reducer";
+import countReducer from "./reducers/count";
+import personReducer from "./reducers/person";
 
-export default createStore(reducer, applyMiddleware(thunk));
+/**
+ * combineReducers接收一个对象
+ * 该对象理解为整个redux的state
+ */
+const allReducer = combineReducers({
+	count: countReducer,
+	personList: personReducer,
+});
+
+export default createStore(allReducer, applyMiddleware(thunk));

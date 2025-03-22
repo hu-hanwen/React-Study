@@ -1,8 +1,7 @@
-import { INCREMENT, DECREMENT } from "./constant";
+import { INCREMENT, DECREMENT } from "../constant";
 
 const initState = 0;
-
-export default function (preState = initState, action) {
+const countReducer = (preState = initState, action) => {
 	const { type, data } = action;
 	switch (type) {
 		// 加
@@ -11,8 +10,9 @@ export default function (preState = initState, action) {
 		// 减
 		case DECREMENT:
 			return preState - data;
-		// 默认值
 		default:
-			return initState;
+			return preState;
 	}
-}
+};
+
+export default countReducer;

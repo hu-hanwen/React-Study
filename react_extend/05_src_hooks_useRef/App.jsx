@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 
 /* 类式组件 */
 // export default class App extends Component {
@@ -31,6 +31,8 @@ export default function App() {
 	const [count, setCount] = useState(0);
 	const [schoolName, setSchoolName] = useState("尚硅谷");
 
+	const inputEle = useRef();
+
 	// useEffect
 	/**
 	 * useEffect接收两个参数
@@ -45,9 +47,12 @@ export default function App() {
 	 * 传入的第一个参数如果返回一个函数，则该函数返回的是清除函数，该函数会在组件卸载时执行，理解为willUnmount
 	 */
 	useEffect(() => {
-		setInterval(() => {
+		let timer = setInterval(() => {
 			setCount(count + 1);
 		}, 1000);
+		return () => {
+			clearInterval(timer);
+		};
 	}, [count]);
 
 	const increment = () => {
@@ -58,12 +63,20 @@ export default function App() {
 		setSchoolName(schoolName + "@");
 	}
 
+	function showInfo() {
+		alert(inputEle.current.value);
+	}
+
 	return (
 		<div>
 			<h2>当前求和为：{count}</h2>
 			<button onClick={increment}>点击加+1</button>
 			<h2>学校名称为：{schoolName}</h2>
 			<button onClick={changeSchoolName}>修改学校名称</button>
+			<br />
+			<input type="text" ref={inputEle} placeholder="请输入" />
+			<br />
+			<button onClick={showInfo}>提示输入的信息</button>
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from "react";
+import React, { Component, useState, useEffect, useRef, Fragment } from "react";
 
 /* 类式组件 */
 // export default class App extends Component {
@@ -68,7 +68,7 @@ export default function App() {
 	}
 
 	return (
-		<div>
+		<Fragment>
 			<h2>当前求和为：{count}</h2>
 			<button onClick={increment}>点击加+1</button>
 			<h2>学校名称为：{schoolName}</h2>
@@ -77,6 +77,6 @@ export default function App() {
 			<input type="text" ref={inputEle} placeholder="请输入" />
 			<br />
 			<button onClick={showInfo}>提示输入的信息</button>
-		</div>
+		</Fragment>
 	);
 }

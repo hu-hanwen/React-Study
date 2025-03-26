@@ -32,7 +32,7 @@ export default [
 				element: <Message></Message>,
 				children: [
 					{
-						path: "detail",
+						path: "detail/:id/:title/:content",
 						element: <Detail></Detail>,
 					},
 				],

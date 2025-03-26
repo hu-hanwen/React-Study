@@ -15,7 +15,7 @@ export default function Message() {
 				{messageList.map(({ id, title, content }) => {
 					return (
 						<li key={id}>
-							<Link to={`detail?id=${id}&title=${title}&content=${content}`} style={{ cursor: "pointer" }}>
+							<Link to={`detail/${id}/${title}/${content}`} style={{ cursor: "pointer" }}>
 								{content}
 							</Link>
 						</li>
